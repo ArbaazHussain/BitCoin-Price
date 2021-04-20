@@ -10,40 +10,27 @@
 import UIKit
 
 
-
 class bitcoinViewController: UIViewController {
-
     
+    var coinManager = CoinManager()
     
     @IBOutlet weak var bitcoinLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var currencyPicker: UIPickerView!
     
-    
-    
-    var coinManager = CoinManager()
-
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         coinManager.delegate = self
         currencyPicker.dataSource = self
         currencyPicker.delegate = self
     }
+    
 }
 
 
-
-
-
 //MARK: - CoinManagerDelegate
-
 extension bitcoinViewController: CoinManagerDelegate {
-    
     func didUpdatePrice(price: String, currency: String) {
-        
         DispatchQueue.main.async {
             self.bitcoinLabel.text = price
             self.currencyLabel.text = currency
@@ -56,11 +43,7 @@ extension bitcoinViewController: CoinManagerDelegate {
 }
 
 
-
-
-
 //MARK: - UIPickerView DataSource & Delegate
-
 extension bitcoinViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
